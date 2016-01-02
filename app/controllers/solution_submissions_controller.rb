@@ -1,6 +1,53 @@
 class SolutionSubmissionsController < ApplicationController
   before_action :set_solution_submission, only: [:show, :edit, :update, :destroy]
 
+
+# This function takes a user's solution as a string,
+# generates Checker.java with the solution in it,
+# compiles it, and runs
+# The return value is either 
+# 'Did not compile'
+# 'Wrong answer'
+# 'Correct answer!'
+def run_checker user_solution
+  # Remove Checker.java
+  system 'rm -f Checker.java'
+
+  # Generates Checker.java
+  system 'cp /home/yancy/app/checker/CheckerTemplate /tmp/Checker.java'
+  if !$?.success?
+    raise 'Error while copying CheckerTemplate to /tmp/Checker.java.'
+  end
+
+  # Replace $s in Checker.java to user_solution
+  file_name = '/tmp/Checker.java'
+  text = File.read(file_name)
+  new_contents = text.gsub("$s", user_solution)
+
+  File.open(file_name, "w") {|file| file.puts new_contents }
+#   if !$?.success?
+#    raise "Error while inserting user's solution into Checker.java"
+#   end
+
+  # Compiling...
+  system 'javac /tmp/Checker.java'
+  if !$?.success?
+    return 'Did not compile'
+  end
+
+  # Runs it
+  input           = 'aBCdEfg'
+  expected_output = 'abcdefg'
+  system ('java -cp /tmp Checker ' + input + ' ' + expected_output)
+  if !$?.success?
+    return 'Wrong output'
+  end
+
+  return 'Correct answer!'
+end
+
+# The following is for testing purpuse
+
   # GET /solution_submissions
   # GET /solution_submissions.json
   def index
@@ -10,6 +57,7 @@ class SolutionSubmissionsController < ApplicationController
   # GET /solution_submissions/1
   # GET /solution_submissions/1.json
   def show
+    @output = run_checker params["comment"]
   end
 
   # GET /solution_submissions/new
