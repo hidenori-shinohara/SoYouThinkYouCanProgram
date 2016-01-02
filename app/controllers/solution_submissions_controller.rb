@@ -9,14 +9,14 @@ class SolutionSubmissionsController < ApplicationController
 # 'Wrong answer'
 # 'Correct answer!'
 def run_checker user_solution
-  file_name = "#{Dir.pwd}/checker/Checker.java"
   checker_dir = "#{Dir.pwd}/checker"
+  file_name = "#{checker_dir}/Checker.java"
 
   # Remove Checker.java
   system 'rm -f Checker.java'
 
   # Generates Checker.java
-  system "cp #{Dir.pwd}/checker/CheckerTemplate #{file_name}"
+  system "cp #{checker_dir}/CheckerTemplate #{file_name}"
   if !$?.success?
     raise 'Error while copying CheckerTemplate to /tmp/Checker.java.'
   end
