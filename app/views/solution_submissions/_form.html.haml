@@ -1,0 +1,15 @@
+= form_for(@solution_submission) do |f|
+  - if @solution_submission.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@solution_submission.errors.count, "error")
+        prohibited this solution_submission from being saved:
+      %ul
+        - @solution_submission.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.label :solition
+    %br/
+    = f.text_field :solition
+  .actions
+    = f.submit

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :matches
   resources :solution_submissions
   get 'welcome/index'
 
