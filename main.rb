@@ -17,19 +17,10 @@ def run_checker user_solution
   end
 
   # Replace $s in Checker.java to user_solution
-
-
-#############
-  file_name = '/tmp/Checker.java'
-  text = File.read(file_name)
-  new_contents = text.gsub("$s", user_solution)
-  File.open(file_name, "w") {|file| file.puts new_contents }
-#############
-
-#  system( "sed -i 's/$s/" + user_solution + "/g' Checker.java")
-#  if !$?.success?
-#    raise "Error while inserting user's solution into Checker.java"
-#  end
+  system( "sed -i 's/$s/" + user_solution + "/g' Checker.java")
+  if !$?.success?
+    raise "Error while inserting user's solution into Checker.java"
+  end
 
   # Compiling...
   system 'javac Checker.java'
