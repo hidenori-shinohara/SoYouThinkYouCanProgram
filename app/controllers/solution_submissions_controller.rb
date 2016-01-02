@@ -1,7 +1,6 @@
 class SolutionSubmissionsController < ApplicationController
   before_action :set_solution_submission, only: [:show, :edit, :update, :destroy]
 
-
 # This function takes a user's solution as a string,
 # generates Checker.java with the solution in it,
 # compiles it, and runs
@@ -10,27 +9,26 @@ class SolutionSubmissionsController < ApplicationController
 # 'Wrong answer'
 # 'Correct answer!'
 def run_checker user_solution
+  file_name = "#{Dir.pwd}/checker/Checker.java"
+  checker_dir = "#{Dir.pwd}/checker"
+
   # Remove Checker.java
   system 'rm -f Checker.java'
 
   # Generates Checker.java
-  system 'cp /home/yancy/app/checker/CheckerTemplate /tmp/Checker.java'
+  system "cp #{Dir.pwd}/checker/CheckerTemplate #{file_name}"
   if !$?.success?
     raise 'Error while copying CheckerTemplate to /tmp/Checker.java.'
   end
 
   # Replace $s in Checker.java to user_solution
-  file_name = '/tmp/Checker.java'
   text = File.read(file_name)
   new_contents = text.gsub("$s", user_solution)
 
   File.open(file_name, "w") {|file| file.puts new_contents }
-#   if !$?.success?
-#    raise "Error while inserting user's solution into Checker.java"
-#   end
 
   # Compiling...
-  system 'javac /tmp/Checker.java'
+  system "javac #{file_name}"
   if !$?.success?
     return 'Did not compile'
   end
@@ -38,7 +36,7 @@ def run_checker user_solution
   # Runs it
   input           = 'aBCdEfg'
   expected_output = 'abcdefg'
-  system ('java -cp /tmp Checker ' + input + ' ' + expected_output)
+  system ("java -cp #{checker_dir} Checker " + input + ' ' + expected_output)
   if !$?.success?
     return 'Wrong output'
   end
