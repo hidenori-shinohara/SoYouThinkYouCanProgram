@@ -1,4 +1,5 @@
 %p#notice= notice
+%p= params
 %h1 Listing Matches
 %table
   %thead
@@ -7,8 +8,9 @@
   %tbody
     - @matches.each do |match|
       %tr
+        %td= match.created_by
         %td= link_to 'Show', match
         %td= link_to 'Edit', edit_match_path(match)
         %td= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' }
 %br/
-= link_to 'New Match', new_match_path
+= link_to 'New Match', new_match_path({username: params["username"]})

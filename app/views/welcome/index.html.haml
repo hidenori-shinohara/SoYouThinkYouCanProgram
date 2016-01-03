@@ -1,5 +1,9 @@
 %h1 soYouThinkYouCanProgram()
-%p= params
 
-%form{:id => "usrform", :name => "find_match" ,:action => "match"}
+#content
+  .left.column
+    %p username: #{@rand_word}
+
+%form{:id => "usrform", :name => @rand_word ,:action => "match"}
+  %input{:type => "hidden", :name => "username", :value => @rand_word}
   %input{:type => "submit"}!

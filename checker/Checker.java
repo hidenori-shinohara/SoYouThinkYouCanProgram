@@ -24,8 +24,5 @@ class Checker {
   /*
     This is where user's solution will be.
   */ 
-  static String myfunc(String input){
-  return input.toLowerCase();
-}
-
+  static $s
 }

@@ -28,6 +28,10 @@ gem 'pry-rails', :group => :development
 gem 'haml'
 gem "haml-rails", "~> 0.9"
 
+gem 'devise'
+
+gem 'random-word-generator', '~> 0.0.1'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

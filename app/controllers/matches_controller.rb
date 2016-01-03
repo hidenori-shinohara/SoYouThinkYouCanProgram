@@ -14,7 +14,9 @@ class MatchesController < ApplicationController
 
   # GET /matches/new
   def new
-    @match = Match.new
+    user = params["username"]
+    @match = Match.new(created_by: user)
+    @match.save
   end
 
   # GET /matches/1/edit
