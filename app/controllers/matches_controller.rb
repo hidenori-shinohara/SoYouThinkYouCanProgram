@@ -21,6 +21,12 @@ class MatchesController < ApplicationController
   def edit
   end
 
+  def join
+  end
+
+  def query
+  end
+
   # POST /matches
   # POST /matches.json
   def create

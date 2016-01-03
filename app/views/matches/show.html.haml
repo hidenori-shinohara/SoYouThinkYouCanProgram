@@ -1,4 +1,10 @@
-%p#notice= notice
-= link_to 'Edit', edit_match_path(@match)
-|
-= link_to 'Back', matches_path
+%h1 Waiting for user to join
+
+- url = App::Application.routes.url_helpers
+
+:coffeescript
+  $ ->
+    alert "No semicolons! #{url.matches_path}"
+    $.get "/match/#{@match.id}", (data) ->
+        $('body').append "Successfully got the page."
+

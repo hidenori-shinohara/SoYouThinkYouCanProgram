@@ -11,6 +11,10 @@ Rails.application.routes.draw do
 
   get 'solution' => 'solution_submissions#show'
 
+  get 'match' => 'matches#index'
+
+  get 'match/:id' => 'matches#query'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,10 +1,5 @@
 %h1 soYouThinkYouCanProgram()
 %p= params
-%textarea{:cols => "75", :form => "usrform", :method => "post", :name => "comment", :rows => "25"}
-  :preserve
-    String myfunc(String input){
-      return input.toLowerCase();
-    }
 
-%form{:id => "usrform", :action => "solution"}
+%form{:id => "usrform", :name => "find_match" ,:action => "match"}
   %input{:type => "submit"}!
