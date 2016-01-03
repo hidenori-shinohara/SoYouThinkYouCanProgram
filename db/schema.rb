@@ -11,9 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160102203445) do
+ActiveRecord::Schema.define(version: 20160103004836) do
 
   create_table "matches", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "problems", force: :cascade do |t|
+    t.string   "desc"
+    t.string   "output"
+    t.string   "input"
+    t.string   "func_type"
+    t.string   "signature"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
