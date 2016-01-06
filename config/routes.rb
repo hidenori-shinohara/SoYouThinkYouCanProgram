@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 
   get 'solution' => 'solution_submissions#show'
 
+  get 'match/join/:id' => 'matches#join', :as => "join_match"
+
   get 'match' => 'matches#index'
 
   get 'match/:id' => 'matches#query'

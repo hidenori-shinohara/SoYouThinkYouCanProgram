@@ -22,17 +22,22 @@ class MatchesController < ApplicationController
   end
 
   def join
+    username = params["username"]
+    @match = Match.find(params[:id])
+    binding.pry
+    @match.update_column :joined_by, username
+    @match.save
+    binding.pry
   end
 
   def query
+    binding.pry
   end
 
   # POST /matches
   # POST /matches.json
   def create
-
     @match = Match.new(match_params)
-
     respond_to do |format|
       if @match.save
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
