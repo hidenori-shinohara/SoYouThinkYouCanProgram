@@ -10,15 +10,11 @@ class MatchesController < ApplicationController
   # GET /matches/1
   # GET /matches/1.json
   def show
-    binding.pry
   end
 
   # GET /matches/new
   def new
     @match = Match.new()
-    binding.pry
-    @rand_word = RandomWordGenerator.word
-    #@weapon = "java"
   end
 
   # GET /matches/1/edit
@@ -35,12 +31,10 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
 
-    binding.pry
     @match = Match.new(match_params)
 
     respond_to do |format|
       if @match.save
-        binding.pry
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
