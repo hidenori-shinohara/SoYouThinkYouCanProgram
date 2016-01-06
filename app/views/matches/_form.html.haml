@@ -1,6 +1,5 @@
 = form_for(@match) do |f|
-  - hidden_field_tag(:created_by, "hiiii")
-  = f.text_field :created_by
+  = f.hidden_field :created_by, :value => params["username"]
   - if @match.errors.any?
     #error_explanation
       %h2
