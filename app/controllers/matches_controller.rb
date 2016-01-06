@@ -29,6 +29,9 @@ class MatchesController < ApplicationController
   end
 
   def query
+    @match = Match.find(params[:id])
+    render :json => @match
+    #render :nothing => true
   end
 
   # POST /matches

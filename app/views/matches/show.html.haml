@@ -3,8 +3,24 @@
 - url = App::Application.routes.url_helpers
 
 :coffeescript
-  $ ->
-    alert "No semicolons! #{url.matches_path}"
-    $.get "/match/#{@match.id}", (data) ->
-        $('body').append "Successfully got the page."
+  f = () ->
+    console.log('start query')
+    $ ->
+      $.ajax
+        url: "/match/#{@match.id}"
+        type: "get"
+        dataType: "json"
+        timeout: 3000
+        success: (data) ->
+          f() if !test_method(data)
 
+  test_method = (data) -> 
+    if data["joined_by"] == null
+      return false
+      console.log "waiting"
+    else
+      $("body").append( "<strong>Match Joined!</strong>" );
+      return true
+      console.log "joined"
+
+  f()
