@@ -10,13 +10,15 @@ class MatchesController < ApplicationController
   # GET /matches/1
   # GET /matches/1.json
   def show
+    binding.pry
   end
 
   # GET /matches/new
   def new
-    user = params["username"]
-    @match = Match.new(created_by: user)
-    @match.save
+    @match = Match.new()
+    binding.pry
+    @rand_word = RandomWordGenerator.word
+    #@weapon = "java"
   end
 
   # GET /matches/1/edit
@@ -32,13 +34,17 @@ class MatchesController < ApplicationController
   # POST /matches
   # POST /matches.json
   def create
+
+    binding.pry
     @match = Match.new(match_params)
 
     respond_to do |format|
       if @match.save
+        binding.pry
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
+        binding.pry
         format.html { render :new }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end
@@ -77,6 +83,6 @@ class MatchesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
-      params[:match]
+      params.require(:match).permit(:created_by)
     end
 end

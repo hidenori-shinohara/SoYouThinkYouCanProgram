@@ -2,8 +2,6 @@
 
 #content
   .left.column
-    %p username: #{@rand_word}
-
-%form{:id => "usrform", :name => @rand_word ,:action => "match"}
-  %input{:type => "hidden", :name => "username", :value => @rand_word}
+    %p welcome
+%form{:id => "usrform", :name => "welcome" ,:action => "match"}
   %input{:type => "submit"}!
