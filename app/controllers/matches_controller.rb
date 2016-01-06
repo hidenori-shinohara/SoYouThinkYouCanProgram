@@ -24,14 +24,11 @@ class MatchesController < ApplicationController
   def join
     username = params["username"]
     @match = Match.find(params[:id])
-    binding.pry
     @match.update_column :joined_by, username
     @match.save
-    binding.pry
   end
 
   def query
-    binding.pry
   end
 
   # POST /matches
