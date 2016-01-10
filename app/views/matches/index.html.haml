@@ -7,8 +7,8 @@
   %tbody
     - @matches.each do |match|
       %tr
-        %td= match.created_by
-        %td= link_to 'Join', join_match_path(match, {username: "test"})
-        %td= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+        %td.table-row-title= match.created_by
+        %td.table-row-actions= link_to 'Join', join_match_path(match, {username: "test"})
+        %td.table-row-actions= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' }
+
 = link_to 'New Match', new_match_path({username: params["username"]})

@@ -1,3 +1,23 @@
 // Place all the styles related to the matches controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.table-row-title {
+  padding-right: 30px
+}
+
+.table-row-actions {
+  padding-right: 10px
+}
+
+.darkBG {
+  background: #999;
+}
+
+.darkerBG {
+  background: #666;
+}
+
+.darkestBG {
+  background: #333;
+}
