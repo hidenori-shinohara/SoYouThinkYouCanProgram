@@ -17,7 +17,7 @@
       return false
       console.log "waiting"
     else
-      $("body").append( "<strong>Match Joined!</strong>" );
+      window.location.replace("/match/join/#{@match.id}");
       return true
       console.log "joined"
 
