@@ -28,6 +28,8 @@ gem 'pry-rails', :group => :development
 gem 'haml'
 gem "haml-rails", "~> 0.9"
 
+gem 'bootstrap-sass'
+
 gem 'devise'
 
 gem 'random-word-generator', '~> 0.0.1'
