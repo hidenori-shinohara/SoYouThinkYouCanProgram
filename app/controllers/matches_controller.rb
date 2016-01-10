@@ -23,6 +23,10 @@ class MatchesController < ApplicationController
 
   def join
     username = params["username"]
+    @problem_id = Problem.random_id
+    @problem_statement = Problem.find(@problem_id).desc
+    @problem_signature = Problem.find(@problem_id).signature
+#    binding.pry
     @match = Match.find(params[:id])
     @match.update_column :joined_by, username
     @match.save

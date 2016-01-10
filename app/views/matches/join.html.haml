@@ -1,2 +1,9 @@
 %h1 Joined match
-
+%h2 Here is a programming challenge for you!
+#content
+  #{@problem_statement}
+%textarea{:cols => "75", :form => "usrform", :method => "post", :name => "comment", :rows => "25"}
+  :preserve 
+    #{@problem_signature}
+%form{:id => "usrform", :action => "solution"}
+  %input{:type => "submit"}!
