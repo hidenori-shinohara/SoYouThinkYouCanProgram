@@ -1,9 +1,38 @@
+!!!
+%html
+  %head
+    = javascript_include_tag "ace-builds/src-noconflict/ace.js" 
+    = javascript_include_tag "ace-builds/src-noconflict/theme-monokai.js" 
+    = javascript_include_tag "ace-builds/src-noconflict/mode-java.js" 
+
 %h1 Joined match
 %h2 Here is a programming challenge for you!
+%style{:media => "screen", :type => "text/css"}
+  \#editor {
+  position: relative;
+  top: 20px;
+  width: 1000px;
+  height: 350px;
+  bottom: 100px;
+  }
+
 #content
   #{@problem_statement}
-%textarea{:cols => "75", :form => "usrform", :method => "post", :name => "comment", :rows => "25"}
-  :preserve 
-    #{@problem_signature}
+
+
+#editor
+  #{@problem_signature}
+
+
+:javascript
+  var editor = ace.edit("editor");
+  editor.setTheme("ace/theme/monokai");
+  editor.getSession().setMode("ace/mode/java");
+
+%style{:media => "screen", :type => "text/css"}
+  \#usrform {
+  top: 40px;
+  position: relative;
+  }
 %form{:id => "usrform", :action => "solution"}
   %input{:type => "submit"}!

@@ -9,3 +9,10 @@ Rails.application.config.assets.version = '1.0'
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
+
+
+
+# It seems that we need to add the mode-<language name>.js here
+Rails.application.config.assets.precompile += %w( ace-builds/src-noconflict/ace.js )
+Rails.application.config.assets.precompile += %w( ace-builds/src-noconflict/theme-monokai.js )
+Rails.application.config.assets.precompile += %w( ace-builds/src-noconflict/mode-java.js )
