@@ -19,20 +19,28 @@
 #content
   #{@problem_statement}
 
-
 #editor
   #{@problem_signature}
 
-
-:javascript
-  var editor = ace.edit("editor");
-  editor.setTheme("ace/theme/monokai");
-  editor.getSession().setMode("ace/mode/java");
+:coffeescript
+  editor = ace.edit("editor")
+  editor.setTheme "ace/theme/monokai"
+  editor.getSession().setMode "ace/mode/java"
+  $(document).ready ->
+    $('#check_answer').click (event) ->
+      event.preventDefault()
+      console.log editor.getValue();
+      $.ajax
+        contentType: 'application/json',
+        url: "/match/check_answer/#{@match.id}",
+        type: "GET",
+        dataType: "json",
+        data: { answer: editor.getValue() }
 
 %style{:media => "screen", :type => "text/css"}
-  \#usrform {
+  \#check_answer{
   top: 40px;
   position: relative;
   }
-%form{:id => "usrform", :action => "solution"}
-  %input{:type => "submit"}!
+
+=link_to "Submit", {:controller => 'matches', :action => 'check_answer'}, id: "check_answer", class: "btn btn-danger edituser"

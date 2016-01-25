@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get 'match/:id' => 'matches#query'
 
+  get 'match/check_answer/:id' => 'matches#check_answer', :as => 'check_answer'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
