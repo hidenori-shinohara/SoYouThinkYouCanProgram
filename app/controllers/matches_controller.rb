@@ -27,18 +27,21 @@ class MatchesController < ApplicationController
     @problem_statement = Problem.find(@problem_id).desc
     @problem_signature = Problem.find(@problem_id).signature
     @match = Match.find(params[:id])
-    @match.update_column :joined_by, username
+    @match.joined_by = username
+    @match.problem_id = @problem_id
     @match.save
   end
 
   def check_answer
-    binding.pry
+    answer = params["answer"]
+    m = Match.find_by_id params["id"]
+    result = Problem.test(m.problem_id, answer)
+    render :json => {result: result}
   end
 
   def query
     @match = Match.find(params[:id])
     render :json => @match
-    #render :nothing => true
   end
 
   # POST /matches

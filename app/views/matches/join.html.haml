@@ -29,18 +29,23 @@
   $(document).ready ->
     $('#check_answer').click (event) ->
       event.preventDefault()
-      console.log editor.getValue();
+      console.log "send result"
       $.ajax
         contentType: 'application/json',
         url: "/match/check_answer/#{@match.id}",
         type: "GET",
         dataType: "json",
         data: { answer: editor.getValue() }
+        success: (data) ->
+          $("#result").append(data.result)
+          return
 
 %style{:media => "screen", :type => "text/css"}
-  \#check_answer{
+  \.join{
   top: 40px;
   position: relative;
   }
 
-=link_to "Submit", {:controller => 'matches', :action => 'check_answer'}, id: "check_answer", class: "btn btn-danger edituser"
+=link_to "Submit", {:controller => 'matches', :action => 'check_answer'}, id: "check_answer", class: "join btn btn-danger edituser"
+
+#result.join

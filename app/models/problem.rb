@@ -1,4 +1,6 @@
 class Problem < ActiveRecord::Base
+  has_one :match
+
   # returns a random id
   def self.random_id
     return self.ids.sample
