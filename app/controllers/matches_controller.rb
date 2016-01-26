@@ -4,6 +4,7 @@ class MatchesController < ApplicationController
   # GET /matches
   # GET /matches.json
   def index
+    @username = params["username"]
     @matches = Match.all
   end
 
@@ -22,21 +23,34 @@ class MatchesController < ApplicationController
   end
 
   def join
-    username = params["username"]
+    @username = params["username"]
     @problem_id = Problem.random_id
     @problem_statement = Problem.find(@problem_id).desc
     @problem_signature = Problem.find(@problem_id).signature
     @match = Match.find(params[:id])
-    @match.joined_by = username
+    @match.joined_by = @username
     @match.problem_id = @problem_id
     @match.save
   end
 
   def check_answer
     answer = params["answer"]
+    username = params["user"]
+    game_status = "Undetermined"
+
     m = Match.find_by_id params["id"]
     result = Problem.test(m.problem_id, answer)
-    render :json => {result: result}
+
+    if !m.solved_by
+      if result == "Correct answer!"
+        m.solved_by = username
+        game_status = "Victory!"
+        m.save
+      end
+    elsif
+      game_status = "Lost :("
+    end
+    render :json => {answer_result: result, game_status: game_status}
   end
 
   def query
@@ -53,7 +67,6 @@ class MatchesController < ApplicationController
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
-        binding.pry
         format.html { render :new }
         format.json { render json: @match.errors, status: :unprocessable_entity }
       end

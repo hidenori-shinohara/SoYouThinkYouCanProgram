@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125235011) do
+ActiveRecord::Schema.define(version: 20160126163137) do
 
   create_table "matches", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160125235011) do
     t.string   "created_by"
     t.string   "joined_by"
     t.integer  "problem_id"
+    t.string   "solved_by"
   end
 
   add_index "matches", ["problem_id"], name: "index_matches_on_problem_id"

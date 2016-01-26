@@ -23,10 +23,10 @@
   #{@problem_signature}
 
 :coffeescript
-  editor = ace.edit("editor")
-  editor.setTheme "ace/theme/monokai"
-  editor.getSession().setMode "ace/mode/java"
   $(document).ready ->
+    editor = ace.edit("editor")
+    editor.setTheme "ace/theme/monokai"
+    editor.getSession().setMode "ace/mode/java"
     $('#check_answer').click (event) ->
       event.preventDefault()
       console.log "send result"
@@ -35,9 +35,10 @@
         url: "/match/check_answer/#{@match.id}",
         type: "GET",
         dataType: "json",
-        data: { answer: editor.getValue() }
+        data: { answer: editor.getValue(), user: "#{@username}" },
         success: (data) ->
-          $("#result").append(data.result)
+          $("#program_answer").append(data.answer_result)
+          $("#game_status").append(data.game_status)
           return
 
 %style{:media => "screen", :type => "text/css"}
@@ -48,4 +49,8 @@
 
 =link_to "Submit", {:controller => 'matches', :action => 'check_answer'}, id: "check_answer", class: "join btn btn-danger edituser"
 
-#result.join
+#program_answer.join
+
+#game_status.join
+
+
