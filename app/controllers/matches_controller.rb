@@ -48,7 +48,7 @@ class MatchesController < ApplicationController
         m.save
       end
     elsif
-      game_status = "Lost :("
+      game_status = "Take a shot!"
     end
     render :json => {answer_result: result, game_status: game_status}
   end
